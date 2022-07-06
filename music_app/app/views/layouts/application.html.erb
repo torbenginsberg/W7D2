@@ -10,6 +10,19 @@
   </head>
 
   <body>
+    <div>
+      <% if current_user.nil? %>
+        <a href="<%= new_session_url%>">Sign In</a>
+        <a href="<%= new_user_url %>">Sign Up</a>
+      <% else %>
+        <%= current_user.email %>
+        <form action="<%= session_url %>" method="post">
+          <%= auth_token %>
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Logout">
+        </form>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
