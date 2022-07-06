@@ -7,6 +7,7 @@ class UsersController < ApplicationController
             redirect_to user_url(@user) #temporary, will prob redirect elsewhere
         else
             #show error with flash?
+            flash.now[:errors]
             render :new
         end
     end
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require[:user].permit[:email, :password]
+        params.require(:user).permit(:email, :password)
     end
 
 end
